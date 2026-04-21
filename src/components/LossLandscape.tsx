@@ -79,38 +79,61 @@ function Surface() {
     pos.needsUpdate = true;
     geo.computeVertexNormals();
 
-    // Vertex colors based on height
-    const colors = new Float32Array(pos.count * 3);
+    // Per-vertex height colors (used by the line grid)
+    const vertColors: THREE.Color[] = [];
     const c = new THREE.Color();
     for (let i = 0; i < pos.count; i++) {
       const y = pos.getY(i);
       const t = (y - zMin) / (zMax - zMin || 1);
       heightColor(t, c);
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
+      vertColors.push(c.clone());
     }
-    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
-    const wire = new THREE.WireframeGeometry(geo);
-    return { geometry: geo, wireGeometry: wire, zMin, zMax };
+    // Build a grid of line segments (rows + columns) with per-vertex colors
+    const W = SEGMENTS + 1;
+    const positions: number[] = [];
+    const colors: number[] = [];
+    const pushSeg = (a: number, b: number) => {
+      positions.push(pos.getX(a), pos.getY(a), pos.getZ(a));
+      positions.push(pos.getX(b), pos.getY(b), pos.getZ(b));
+      const ca = vertColors[a];
+      const cb = vertColors[b];
+      colors.push(ca.r, ca.g, ca.b, cb.r, cb.g, cb.b);
+    };
+    for (let r = 0; r < W; r++) {
+      for (let cIdx = 0; cIdx < W - 1; cIdx++) {
+        pushSeg(r * W + cIdx, r * W + cIdx + 1);
+      }
+    }
+    for (let cIdx = 0; cIdx < W; cIdx++) {
+      for (let r = 0; r < W - 1; r++) {
+        pushSeg(r * W + cIdx, (r + 1) * W + cIdx);
+      }
+    }
+    const wire = new THREE.BufferGeometry();
+    wire.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+    wire.setAttribute("color", new THREE.Float32BufferAttribute(colors, 3));
+
+    return { geometry: geo, wireGeometry: wire };
   }, []);
 
   return (
     <group>
+      {/* Invisible mesh kept for depth occlusion of the ball/trail */}
       <mesh geometry={geometry} castShadow={false} receiveShadow={false}>
-        <meshStandardMaterial
-          vertexColors
-          metalness={0.1}
-          roughness={0.85}
+        <meshBasicMaterial
+          colorWrite={false}
           transparent
-          opacity={0.55}
-          emissive={C_LOW}
-          emissiveIntensity={0.08}
+          opacity={0}
+          depthWrite
         />
       </mesh>
       <lineSegments geometry={wireGeometry}>
-        <lineBasicMaterial color={C_LOW} transparent opacity={0.18} />
+        <lineBasicMaterial
+          vertexColors
+          transparent
+          opacity={0.85}
+        />
       </lineSegments>
     </group>
   );
