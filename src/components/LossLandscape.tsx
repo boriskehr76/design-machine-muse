@@ -197,7 +197,12 @@ function Ball({ reduced }: { reduced: boolean }) {
     const s = stateRef.current;
     const dt = Math.min(delta, 1 / 30);
 
-    if (!reduced) {
+    if (s.dragging) {
+      // Hold position; trail follows. Keep settle counter reset.
+      s.settledFrames = 0;
+      s.fade = Math.min(1, s.fade + dt * 1.6);
+      s.fadingOut = false;
+    } else if (!reduced) {
       if (s.fadingOut) {
         s.fade = Math.max(0, s.fade - dt * 1.6);
         if (s.fade <= 0) respawn();
