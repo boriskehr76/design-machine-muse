@@ -139,7 +139,7 @@ function Surface() {
   );
 }
 
-const TRAIL_LEN = 60;
+const TRAIL_LEN = 180;
 
 function Ball({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -192,25 +192,26 @@ function Ball({ reduced }: { reduced: boolean }) {
         if (s.fade <= 0) respawn();
       } else {
         s.fade = Math.min(1, s.fade + dt * 1.6);
-        // Gradient descent step
-        const lr = 0.9;
-        const friction = 0.86;
+        // Gravity-driven descent: acceleration proportional to slope, light damping
+        const gravity = 4.5;
+        const damping = 0.995; // very light air resistance so it gains speed downhill
         const [gx, gy] = gradient(s.x, s.y);
-        s.vx = s.vx * friction - lr * gx * dt;
-        s.vy = s.vy * friction - lr * gy * dt;
-        s.x += s.vx * dt * 3;
-        s.y += s.vy * dt * 3;
-        // Clamp to plane bounds
+        s.vx = (s.vx - gravity * gx * dt) * damping;
+        s.vy = (s.vy - gravity * gy * dt) * damping;
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        // Clamp to plane bounds (bounce)
         const lim = SIZE / 2 - 0.3;
-        if (s.x > lim) { s.x = lim; s.vx = -s.vx * 0.4; }
-        if (s.x < -lim) { s.x = -lim; s.vx = -s.vx * 0.4; }
-        if (s.y > lim) { s.y = lim; s.vy = -s.vy * 0.4; }
-        if (s.y < -lim) { s.y = -lim; s.vy = -s.vy * 0.4; }
+        if (s.x > lim) { s.x = lim; s.vx = -s.vx * 0.5; }
+        if (s.x < -lim) { s.x = -lim; s.vx = -s.vx * 0.5; }
+        if (s.y > lim) { s.y = lim; s.vy = -s.vy * 0.5; }
+        if (s.y < -lim) { s.y = -lim; s.vy = -s.vy * 0.5; }
 
         const speed = Math.hypot(s.vx, s.vy);
-        if (speed < 0.04) {
+        // At a true minimum, gradient is ~0 so velocity bleeds off via damping naturally.
+        if (speed < 0.05) {
           s.settledFrames += 1;
-          if (s.settledFrames > 90) s.fadingOut = true;
+          if (s.settledFrames > 120) s.fadingOut = true;
         } else {
           s.settledFrames = 0;
         }
@@ -234,15 +235,25 @@ function Ball({ reduced }: { reduced: boolean }) {
 
   const trailPoints = trailRef.current.map((v) => [v.x, v.y, v.z] as [number, number, number]);
   const fade = stateRef.current.fade;
+  const trailColors = useMemo<Array<[number, number, number]>>(() => {
+    const arr: Array<[number, number, number]> = [];
+    const c = new THREE.Color();
+    for (let i = 0; i < TRAIL_LEN; i++) {
+      const t = i / (TRAIL_LEN - 1);
+      heightColor(1 - t, c);
+      arr.push([c.r, c.g, c.b]);
+    }
+    return arr;
+  }, []);
 
   return (
     <group>
       <Line
         points={trailPoints}
-        color={C_HIGH}
-        lineWidth={2}
+        vertexColors={trailColors}
+        lineWidth={3}
         transparent
-        opacity={0.55 * fade}
+        opacity={0.9 * fade}
       />
       <mesh ref={meshRef}>
         <sphereGeometry args={[0.16, 24, 24]} />
