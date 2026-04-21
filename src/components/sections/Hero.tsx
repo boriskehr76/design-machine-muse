@@ -1,4 +1,4 @@
-import { GaussianCurve } from "@/components/GaussianCurve";
+import { LossLandscape } from "@/components/LossLandscape";
 import { useT } from "@/contexts/LanguageContext";
 
 export function Hero() {
@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section id="top" className="relative flex min-h-screen w-full items-center overflow-hidden pt-24">
-      <GaussianCurve />
+      <LossLandscape />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-16">
         <div className="mb-8 flex items-center gap-3 font-mono text-xs text-muted-foreground">
