@@ -262,6 +262,29 @@ function Ball({ reduced }: { reduced: boolean }) {
     return arr;
   }, []);
 
+  const endDrag = (e?: any) => {
+    const s = stateRef.current;
+    if (!s.dragging) return;
+    s.dragging = false;
+    const sp = Math.hypot(s.dragVx, s.dragVy);
+    if (sp > MAX_FLING) {
+      const k = MAX_FLING / sp;
+      s.dragVx *= k;
+      s.dragVy *= k;
+    }
+    s.vx = s.dragVx;
+    s.vy = s.dragVy;
+    s.dragVx = 0;
+    s.dragVy = 0;
+    s.fadingOut = false;
+    s.settledFrames = 0;
+    document.body.style.cursor = s.hovering ? "grab" : "";
+    if (e && s.pointerId != null) {
+      try { (e.target as Element).releasePointerCapture?.(s.pointerId); } catch {}
+    }
+    s.pointerId = null;
+  };
+
   return (
     <group>
       <Line
@@ -271,7 +294,33 @@ function Ball({ reduced }: { reduced: boolean }) {
         transparent
         opacity={0.9 * fade}
       />
-      <mesh ref={meshRef}>
+      <mesh
+        ref={meshRef}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          stateRef.current.hovering = true;
+          if (!stateRef.current.dragging) document.body.style.cursor = "grab";
+        }}
+        onPointerOut={() => {
+          stateRef.current.hovering = false;
+          if (!stateRef.current.dragging) document.body.style.cursor = "";
+        }}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          const s = stateRef.current;
+          s.dragging = true;
+          s.pointerId = e.pointerId;
+          s.vx = 0;
+          s.vy = 0;
+          s.dragVx = 0;
+          s.dragVy = 0;
+          s.lastDragX = s.x;
+          s.lastDragY = s.y;
+          s.lastDragT = performance.now();
+          document.body.style.cursor = "grabbing";
+          try { (e.target as Element).setPointerCapture?.(e.pointerId); } catch {}
+        }}
+      >
         <sphereGeometry args={[0.16, 24, 24]} />
         <meshStandardMaterial
           color={C_HIGH}
@@ -283,7 +332,42 @@ function Ball({ reduced }: { reduced: boolean }) {
           metalness={0.4}
         />
       </mesh>
-      {/* Halo light following the ball */}
+
+      {/* Invisible drag plane: raycasts pointer to world XZ while dragging */}
+      <mesh
+        ref={dragPlaneRef}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, 0, 0]}
+        visible={false}
+        onPointerMove={(e) => {
+          const s = stateRef.current;
+          if (!s.dragging) return;
+          e.stopPropagation();
+          const lim = SIZE / 2 - 0.3;
+          const nx = Math.max(-lim, Math.min(lim, e.point.x));
+          const ny = Math.max(-lim, Math.min(lim, e.point.z));
+          const now = performance.now();
+          const dt = Math.max(0.001, (now - s.lastDragT) / 1000);
+          const instVx = (nx - s.lastDragX) / dt;
+          const instVy = (ny - s.lastDragY) / dt;
+          s.dragVx = s.dragVx * 0.6 + instVx * 0.4;
+          s.dragVy = s.dragVy * 0.6 + instVy * 0.4;
+          s.x = nx;
+          s.y = ny;
+          s.lastDragX = nx;
+          s.lastDragY = ny;
+          s.lastDragT = now;
+        }}
+        onPointerUp={(e) => {
+          e.stopPropagation();
+          endDrag(e);
+        }}
+        onPointerCancel={(e) => endDrag(e)}
+      >
+        <planeGeometry args={[SIZE * 4, SIZE * 4]} />
+        <meshBasicMaterial transparent opacity={0} />
+      </mesh>
+
       <pointLight
         position={meshRef.current ? meshRef.current.position.toArray() : [0, 2, 0]}
         color={C_HIGH}
