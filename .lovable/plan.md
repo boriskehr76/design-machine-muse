@@ -1,47 +1,31 @@
 
 
-## Hero 3D loss landscape — gradient descent animation
+## Make the ball draggable with the mouse
 
-Replace the flat Gaussian curve background with an interactive 3D loss landscape where a glowing ball rolls toward local minima, evoking ML gradient descent / optimization.
+Add click-and-drag interaction to the gradient-descent ball so you can grab it, fling it, or place it anywhere on the loss landscape.
 
-### What you'll see
-- A tilted 3D surface filling the hero background, rendered as a **wireframe-over-subtle-fill mesh** with a multi-well loss function (mix of gaussians giving 2–3 valleys and a couple of ridges)
-- A small **glowing ball** that performs gradient descent on the surface — it starts at a random high point, rolls downhill with momentum, settles into a minimum, pauses, then respawns at a new random point to find a different valley
-- A **faint trail** behind the ball (fading line of recent positions) showing the optimization path
-- Soft **color gradient** mapped to height: deep teal/indigo in the valleys, warm magenta/amber on the peaks, so the landscape reads as a heatmap. Low overall opacity so the hero text stays primary
-- Subtle **auto-rotation** of the camera (very slow orbit, a few degrees) so the landscape feels alive without being distracting
-- Respects `prefers-reduced-motion`: ball holds still and camera stops rotating
+### How it will feel
+- Hover the ball → cursor changes to `grab`
+- Press and drag → cursor becomes `grabbing`, the ball follows your mouse across the surface (its height snaps to the landscape under the cursor)
+- Release → the ball resumes physics from that point. If you were moving when you let go, that motion becomes its initial velocity (a "fling"), so you can launch it over ridges into different valleys
+- While dragging, the auto-respawn / fade-out timer is paused so the ball won't disappear under your cursor
+- The colorful trail keeps drawing during the drag, so you see the path you traced
 
-### Tech
-- Add `three@0.160`, `@react-three/fiber@^8.18`, `@react-three/drei@^9.122` (versions per project guidance for React 18)
-- New component `src/components/LossLandscape.tsx` containing the R3F `<Canvas>` with:
-  - `PlaneGeometry` (≈80×80 segments) whose vertex Z is displaced by a sum-of-gaussians `f(x,y)` computed once; vertex colors set from height for the heatmap fill
-  - A second wireframe mesh on top (line segments) for the contour feel
-  - A `<mesh>` sphere (the ball) animated each frame via `useFrame`: compute analytic gradient of `f`, update velocity `v = 0.9·v − lr·∇f`, update position, snap Y to surface height + ball radius
-  - Respawn logic: when |v| < threshold for N frames, fade ball out, pick new random (x,y), fade back in
-  - Trail via a small ring buffer of past positions rendered with `<Line>` from drei, opacity falloff
-  - `<OrbitControls>` disabled; manual slow camera yaw in `useFrame`
-  - `dpr={[1, 1.5]}`, `gl={{ antialias: true, alpha: true }}` for transparent background over the hero's dark bg
-- Lighting: one directional light + low ambient; MeshStandardMaterial with vertex colors and slight emissive in the valleys
-
-### Hero integration
-- In `src/components/sections/Hero.tsx`, replace `<GaussianCurve />` with `<LossLandscape />`
-- Keep `GaussianCurve.tsx` file in place (unused) so it can be reverted easily; remove its import from Hero only
-- Landscape sits `absolute inset-0` behind the existing z-10 content, with a bottom-to-top dark gradient overlay so headline contrast stays strong
-
-### Color palette (HSL, uses existing tokens + two new accents)
-- Low (valleys): `hsl(var(--accent))` — existing teal
-- Mid: a new violet `hsl(262 70% 60%)`
-- High (peaks): a warm magenta/amber `hsl(18 85% 62%)`
-- Values blended per-vertex in JS at mesh-build time; no token changes required
-
-### Performance
-- Geometry + colors computed once on mount, not per frame
-- Ball + trail are the only per-frame updates; target 60fps on a laptop, throttled to 30fps on mobile via `useFrame` delta check
-- Canvas is `pointer-events-none` and pauses rendering when the hero scrolls out of view (`frameloop="demand"` flip via IntersectionObserver)
+### Technical approach (one file: `src/components/LossLandscape.tsx`)
+- Flip the hero overlay so the Canvas can receive pointer events: remove `pointer-events-none` from the wrapping `div`, but keep the two gradient overlay `div`s as `pointer-events-none` so text and CTAs above stay clickable. The Canvas itself sits behind hero content (z-index unchanged); only the ball mesh will actually consume events.
+- Add an invisible **drag plane** (a large horizontal `<mesh>` at y≈0 with `visible={false}`) used purely for raycasting the mouse into world XZ coordinates while dragging.
+- On the ball `<mesh>`:
+  - `onPointerOver` → `document.body.style.cursor = 'grab'`
+  - `onPointerOut` → reset cursor (unless dragging)
+  - `onPointerDown` → start drag: `e.stopPropagation()`, `e.target.setPointerCapture(e.pointerId)`, set `dragging = true`, cursor `grabbing`, zero velocity, record timestamp + position
+- On the Canvas (or the drag plane) while `dragging`:
+  - `onPointerMove` → raycast pointer against the drag plane → get `(x, z)` → update `state.x`, `state.y` to that point (clamped to `±SIZE/2 - 0.3`); compute instantaneous velocity from delta-position / delta-time and store as `lastDragVx/Vy` (smoothed with a small EMA) so release feels natural
+  - `onPointerUp` / `onPointerLeave` → end drag: set `vx = lastDragVx`, `vy = lastDragVy` (clamped to a max so flings stay reasonable), reset cursor, resume physics
+- In the existing `useFrame` ball update: if `dragging` is true, skip gravity/integration but still update the trail and the ball's Y from `loss(x, y)` so it hugs the surface; also reset the `settledFrames` counter so it can't fade out mid-drag
+- `prefers-reduced-motion` users: dragging still works (it's user-initiated); only the autonomous physics stays paused — on release, velocity is applied normally so they can flick it once and watch it glide
+- Touch support comes for free since R3F pointer events cover touch + mouse; pointer capture ensures the drag continues even if the cursor leaves the ball
 
 ### Files
-- Add: `src/components/LossLandscape.tsx`
-- Edit: `src/components/sections/Hero.tsx` (swap background component, add subtle overlay)
-- Edit: `package.json` (three, @react-three/fiber, @react-three/drei at pinned versions)
+- Edit: `src/components/LossLandscape.tsx` (add drag state, drag plane, pointer handlers, integrate with existing physics loop)
+- Edit: `src/components/sections/Hero.tsx` — none needed; the LossLandscape wrapper handles its own pointer-events scoping internally
 
