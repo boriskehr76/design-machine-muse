@@ -235,15 +235,25 @@ function Ball({ reduced }: { reduced: boolean }) {
 
   const trailPoints = trailRef.current.map((v) => [v.x, v.y, v.z] as [number, number, number]);
   const fade = stateRef.current.fade;
+  const trailColors = useMemo<Array<[number, number, number]>>(() => {
+    const arr: Array<[number, number, number]> = [];
+    const c = new THREE.Color();
+    for (let i = 0; i < TRAIL_LEN; i++) {
+      const t = i / (TRAIL_LEN - 1);
+      heightColor(1 - t, c);
+      arr.push([c.r, c.g, c.b]);
+    }
+    return arr;
+  }, []);
 
   return (
     <group>
       <Line
         points={trailPoints}
-        color={C_HIGH}
-        lineWidth={2}
+        vertexColors={trailColors}
+        lineWidth={3}
         transparent
-        opacity={0.55 * fade}
+        opacity={0.9 * fade}
       />
       <mesh ref={meshRef}>
         <sphereGeometry args={[0.16, 24, 24]} />
