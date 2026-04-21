@@ -1,50 +1,47 @@
 
-# Boris Kehr — Personal Portfolio
 
-A bold, editorial single-page portfolio with EN/SV bilingual support, dark/light theme, and tasteful SVG animations.
+## Hero 3D loss landscape — gradient descent animation
 
-## Design system
-- **Background**: near-black `#0D0D0D`, off-white text `#F5F2EA`-ish
-- **Accent**: cyan/teal (used for the Gaussian curve, "new" badges, "the seam" highlight)
-- **Typography**: DM Serif Display (headings, italic for emphasis) + DM Mono (labels, tags, nav, numbers, UI)
-- **Tokens**: full HSL palette in `index.css`, Tailwind extended in config; no purple gradients, no Inter/Roboto, no emoji
-- **Theme toggle**: dark default, light variant inverts background to off-white with near-black text
+Replace the flat Gaussian curve background with an interactive 3D loss landscape where a glowing ball rolls toward local minima, evoking ML gradient descent / optimization.
 
-## Sections (single page, in order)
+### What you'll see
+- A tilted 3D surface filling the hero background, rendered as a **wireframe-over-subtle-fill mesh** with a multi-well loss function (mix of gaussians giving 2–3 valleys and a couple of ridges)
+- A small **glowing ball** that performs gradient descent on the surface — it starts at a random high point, rolls downhill with momentum, settles into a minimum, pauses, then respawns at a new random point to find a different valley
+- A **faint trail** behind the ball (fading line of recent positions) showing the optimization path
+- Soft **color gradient** mapped to height: deep teal/indigo in the valleys, warm magenta/amber on the peaks, so the landscape reads as a heatmap. Low overall opacity so the hero text stays primary
+- Subtle **auto-rotation** of the camera (very slow orbit, a few degrees) so the landscape feels alive without being distracting
+- Respects `prefers-reduced-motion`: ball holds still and camera stops rotating
 
-1. **Sticky nav** — `boris.kehr` (mono) left; EN/SV toggle + theme toggle right; subtle border on scroll.
-2. **Hero (full viewport)** — Two-line serif heading "Design meets / *machine learning*", subhead paragraph, mono pill tags row, two CTAs (filled `#lia`, ghost `#projects`). Background: animated SVG Gaussian bell curve, low-opacity teal, stroke-dashoffset draw-in on load + slow loop.
-3. **About** — Two-column: heading + 2 paragraphs left; 2×2 stat cards (20+, ~1, 5, ∞) right with serif numbers + mono labels. Numbers count up on scroll; ∞ stays static.
-4. **Skills** — 3-column bordered grid (1px dividers, rounded outer): "ML · in progress" with teal "new" badges, "Design · established", "The seam · the point".
-5. **Projects** — Single project card "01 — sndz-table". Serif title, one-liner, two screenshots from `https://sndz-table.lovable.app` (Z Table view + interactive panel) with subtle border + radius. Click-to-expand detail with: teal-tinted "The seam" highlight box, then two-column "ML side" / "Design side". Footer: "Try it live →" + "GitHub repo →" buttons. Hover changes border color.
-6. **Background / Timeline** — "Where I've been". Vertical timeline; mono year-range left, serif title+company right, paragraph below. Vertical dashed SVG line draws downward on scroll-into-view (Intersection Observer + stroke-dashoffset).
-7. **LIA** — Bordered card, two columns: heading + 2 paragraphs left; bulleted requirements with dot indicators + "Get in touch" button right.
-8. **Contact** — "Let's talk", short paragraph, row of underlined mono text links: email, LinkedIn, design portfolio.
-9. **Footer** — Mono. Left: `Boris Kehr · Stockholm · 2026`. Right: `Built without a template`.
+### Tech
+- Add `three@0.160`, `@react-three/fiber@^8.18`, `@react-three/drei@^9.122` (versions per project guidance for React 18)
+- New component `src/components/LossLandscape.tsx` containing the R3F `<Canvas>` with:
+  - `PlaneGeometry` (≈80×80 segments) whose vertex Z is displaced by a sum-of-gaussians `f(x,y)` computed once; vertex colors set from height for the heatmap fill
+  - A second wireframe mesh on top (line segments) for the contour feel
+  - A `<mesh>` sphere (the ball) animated each frame via `useFrame`: compute analytic gradient of `f`, update velocity `v = 0.9·v − lr·∇f`, update position, snap Y to surface height + ball radius
+  - Respawn logic: when |v| < threshold for N frames, fade ball out, pick new random (x,y), fade back in
+  - Trail via a small ring buffer of past positions rendered with `<Line>` from drei, opacity falloff
+  - `<OrbitControls>` disabled; manual slow camera yaw in `useFrame`
+  - `dpr={[1, 1.5]}`, `gl={{ antialias: true, alpha: true }}` for transparent background over the hero's dark bg
+- Lighting: one directional light + low ambient; MeshStandardMaterial with vertex colors and slight emissive in the valleys
 
-## Bilingual content (EN / SV)
-- All copy from the uploaded `site-copy-en-sv.md` stored as a flat translations object (`{ en: {...}, sv: {...} }`).
-- Lightweight React context (`LanguageProvider`) + `useT()` hook; toggle swaps every text node instantly, no reload, no routing change. Persist choice in `localStorage`.
+### Hero integration
+- In `src/components/sections/Hero.tsx`, replace `<GaussianCurve />` with `<LossLandscape />`
+- Keep `GaussianCurve.tsx` file in place (unused) so it can be reverted easily; remove its import from Hero only
+- Landscape sits `absolute inset-0` behind the existing z-10 content, with a bottom-to-top dark gradient overlay so headline contrast stays strong
 
-## Animations & interactions
-- Hero Gaussian curve: SVG path with `stroke-dasharray`/`stroke-dashoffset` draw-in, then a subtle infinite opacity/translate loop.
-- Section reveal: reusable `useInView` hook → fade + translateY on each section.
-- Stat counters: animate 0 → target on scroll-in (skip ∞).
-- Project card: smooth height expand/collapse for the detail panel.
-- Timeline: dashed vertical SVG draws downward when section enters viewport.
-- Hover: project card border, nav link underline, button states.
+### Color palette (HSL, uses existing tokens + two new accents)
+- Low (valleys): `hsl(var(--accent))` — existing teal
+- Mid: a new violet `hsl(262 70% 60%)`
+- High (peaks): a warm magenta/amber `hsl(18 85% 62%)`
+- Values blended per-vertex in JS at mesh-build time; no token changes required
 
-## Project structure
-- `src/pages/Index.tsx` — composition of all sections
-- `src/components/sections/` — `Nav`, `Hero`, `About`, `Skills`, `Projects`, `Timeline`, `Lia`, `Contact`, `Footer`
-- `src/components/GaussianCurve.tsx`, `TimelineLine.tsx`, `StatCounter.tsx`, `ProjectCard.tsx`
-- `src/i18n/translations.ts` — full EN/SV dictionary from the uploaded copy file
-- `src/contexts/LanguageContext.tsx`, `src/contexts/ThemeContext.tsx`
-- `src/hooks/useInView.ts`, `useCountUp.ts`
-- Fonts loaded via Google Fonts in `index.html` (DM Serif Display, DM Mono)
+### Performance
+- Geometry + colors computed once on mount, not per frame
+- Ball + trail are the only per-frame updates; target 60fps on a laptop, throttled to 30fps on mobile via `useFrame` delta check
+- Canvas is `pointer-events-none` and pauses rendering when the hero scrolls out of view (`frameloop="demand"` flip via IntersectionObserver)
 
-## Images
-I'll capture the two screenshots from `https://sndz-table.lovable.app` (Z Table view + interactive right panel), save into `src/assets/`, and import them in the project card. If capture fails, I'll insert clearly-marked placeholder slots with correct alt text and a comment indicating where to drop the real images.
+### Files
+- Add: `src/components/LossLandscape.tsx`
+- Edit: `src/components/sections/Hero.tsx` (swap background component, add subtle overlay)
+- Edit: `package.json` (three, @react-three/fiber, @react-three/drei at pinned versions)
 
-## Out of scope (per brief)
-No purple/white gradients, no Inter/Roboto, no emoji, no generic AI-portfolio layouts, no HTML `<ul>` bullets in headings/nav.
