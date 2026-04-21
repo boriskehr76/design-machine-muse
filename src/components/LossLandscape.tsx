@@ -405,7 +405,7 @@ export function LossLandscape() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div className="absolute inset-0" aria-hidden="true">
       <Canvas
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true }}
@@ -418,9 +418,9 @@ export function LossLandscape() {
         <Ball reduced={reduced} />
         <CameraRig reduced={reduced} />
       </Canvas>
-      {/* Overlay to keep hero text readable */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/40" />
+      {/* Overlays don't block ball pointer events */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/40" />
     </div>
   );
 }
