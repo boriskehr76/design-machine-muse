@@ -381,14 +381,51 @@ function Ball({ reduced }: { reduced: boolean }) {
 function CameraRig({ reduced }: { reduced: boolean }) {
   const { camera } = useThree();
   const t = useRef(0);
+  // User-controlled offsets driven by arrow keys
+  const userYaw = useRef(0); // left/right
+  const userPitch = useRef(0); // up/down (0..1 height factor)
+  const keys = useRef<Record<string, boolean>>({});
+
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight" ||
+        e.key === "ArrowUp" ||
+        e.key === "ArrowDown"
+      ) {
+        keys.current[e.key] = true;
+        e.preventDefault();
+      }
+    };
+    const up = (e: KeyboardEvent) => {
+      keys.current[e.key] = false;
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, []);
+
   useFrame((_, delta) => {
-    if (reduced) return;
-    t.current += delta * 0.08;
+    // Apply keyboard input regardless of reduced motion (user-initiated)
+    const rotSpeed = 1.2; // rad/s
+    const pitchSpeed = 0.8;
+    if (keys.current["ArrowLeft"]) userYaw.current -= rotSpeed * delta;
+    if (keys.current["ArrowRight"]) userYaw.current += rotSpeed * delta;
+    if (keys.current["ArrowUp"]) userPitch.current = Math.min(1.4, userPitch.current + pitchSpeed * delta);
+    if (keys.current["ArrowDown"]) userPitch.current = Math.max(-0.6, userPitch.current - pitchSpeed * delta);
+
+    if (!reduced) t.current += delta * 0.08;
     const r = 9.5;
-    const yaw = Math.sin(t.current) * 0.35; // gentle sway
+    const swayYaw = reduced ? 0 : Math.sin(t.current) * 0.35;
+    const yaw = swayYaw + userYaw.current;
     camera.position.x = Math.sin(yaw) * r;
     camera.position.z = Math.cos(yaw) * r;
-    camera.position.y = 5.2 + Math.sin(t.current * 0.7) * 0.2;
+    const baseY = 5.2 + (reduced ? 0 : Math.sin(t.current * 0.7) * 0.2);
+    camera.position.y = baseY + userPitch.current * 3.5;
     camera.lookAt(0, -0.4, 0);
   });
   return null;
