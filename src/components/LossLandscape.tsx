@@ -140,9 +140,12 @@ function Surface() {
 }
 
 const TRAIL_LEN = 180;
+const MAX_FLING = 8;
 
 function Ball({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const dragPlaneRef = useRef<THREE.Mesh>(null);
+  const { camera, gl } = useThree();
   const stateRef = useRef({
     x: 3.2,
     y: 2.6,
@@ -151,6 +154,14 @@ function Ball({ reduced }: { reduced: boolean }) {
     settledFrames: 0,
     fade: 0, // 0..1 visibility
     fadingOut: false,
+    dragging: false,
+    pointerId: null as number | null,
+    lastDragX: 0,
+    lastDragY: 0,
+    lastDragT: 0,
+    dragVx: 0,
+    dragVy: 0,
+    hovering: false,
   });
   const trailRef = useRef<THREE.Vector3[]>(
     Array.from({ length: TRAIL_LEN }, () => new THREE.Vector3(3.2, 0, 2.6)),
@@ -186,7 +197,12 @@ function Ball({ reduced }: { reduced: boolean }) {
     const s = stateRef.current;
     const dt = Math.min(delta, 1 / 30);
 
-    if (!reduced) {
+    if (s.dragging) {
+      // Hold position; trail follows. Keep settle counter reset.
+      s.settledFrames = 0;
+      s.fade = Math.min(1, s.fade + dt * 1.6);
+      s.fadingOut = false;
+    } else if (!reduced) {
       if (s.fadingOut) {
         s.fade = Math.max(0, s.fade - dt * 1.6);
         if (s.fade <= 0) respawn();
@@ -246,6 +262,29 @@ function Ball({ reduced }: { reduced: boolean }) {
     return arr;
   }, []);
 
+  const endDrag = (e?: any) => {
+    const s = stateRef.current;
+    if (!s.dragging) return;
+    s.dragging = false;
+    const sp = Math.hypot(s.dragVx, s.dragVy);
+    if (sp > MAX_FLING) {
+      const k = MAX_FLING / sp;
+      s.dragVx *= k;
+      s.dragVy *= k;
+    }
+    s.vx = s.dragVx;
+    s.vy = s.dragVy;
+    s.dragVx = 0;
+    s.dragVy = 0;
+    s.fadingOut = false;
+    s.settledFrames = 0;
+    document.body.style.cursor = s.hovering ? "grab" : "";
+    if (e && s.pointerId != null) {
+      try { (e.target as Element).releasePointerCapture?.(s.pointerId); } catch {}
+    }
+    s.pointerId = null;
+  };
+
   return (
     <group>
       <Line
@@ -255,7 +294,33 @@ function Ball({ reduced }: { reduced: boolean }) {
         transparent
         opacity={0.9 * fade}
       />
-      <mesh ref={meshRef}>
+      <mesh
+        ref={meshRef}
+        onPointerOver={(e) => {
+          e.stopPropagation();
+          stateRef.current.hovering = true;
+          if (!stateRef.current.dragging) document.body.style.cursor = "grab";
+        }}
+        onPointerOut={() => {
+          stateRef.current.hovering = false;
+          if (!stateRef.current.dragging) document.body.style.cursor = "";
+        }}
+        onPointerDown={(e) => {
+          e.stopPropagation();
+          const s = stateRef.current;
+          s.dragging = true;
+          s.pointerId = e.pointerId;
+          s.vx = 0;
+          s.vy = 0;
+          s.dragVx = 0;
+          s.dragVy = 0;
+          s.lastDragX = s.x;
+          s.lastDragY = s.y;
+          s.lastDragT = performance.now();
+          document.body.style.cursor = "grabbing";
+          try { (e.target as Element).setPointerCapture?.(e.pointerId); } catch {}
+        }}
+      >
         <sphereGeometry args={[0.16, 24, 24]} />
         <meshStandardMaterial
           color={C_HIGH}
@@ -267,7 +332,42 @@ function Ball({ reduced }: { reduced: boolean }) {
           metalness={0.4}
         />
       </mesh>
-      {/* Halo light following the ball */}
+
+      {/* Invisible drag plane: raycasts pointer to world XZ while dragging */}
+      <mesh
+        ref={dragPlaneRef}
+        rotation={[-Math.PI / 2, 0, 0]}
+        position={[0, 0, 0]}
+        visible={false}
+        onPointerMove={(e) => {
+          const s = stateRef.current;
+          if (!s.dragging) return;
+          e.stopPropagation();
+          const lim = SIZE / 2 - 0.3;
+          const nx = Math.max(-lim, Math.min(lim, e.point.x));
+          const ny = Math.max(-lim, Math.min(lim, e.point.z));
+          const now = performance.now();
+          const dt = Math.max(0.001, (now - s.lastDragT) / 1000);
+          const instVx = (nx - s.lastDragX) / dt;
+          const instVy = (ny - s.lastDragY) / dt;
+          s.dragVx = s.dragVx * 0.6 + instVx * 0.4;
+          s.dragVy = s.dragVy * 0.6 + instVy * 0.4;
+          s.x = nx;
+          s.y = ny;
+          s.lastDragX = nx;
+          s.lastDragY = ny;
+          s.lastDragT = now;
+        }}
+        onPointerUp={(e) => {
+          e.stopPropagation();
+          endDrag(e);
+        }}
+        onPointerCancel={(e) => endDrag(e)}
+      >
+        <planeGeometry args={[SIZE * 4, SIZE * 4]} />
+        <meshBasicMaterial transparent opacity={0} />
+      </mesh>
+
       <pointLight
         position={meshRef.current ? meshRef.current.position.toArray() : [0, 2, 0]}
         color={C_HIGH}
@@ -305,7 +405,7 @@ export function LossLandscape() {
   }, []);
 
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div className="absolute inset-0" aria-hidden="true">
       <Canvas
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true }}
@@ -318,9 +418,9 @@ export function LossLandscape() {
         <Ball reduced={reduced} />
         <CameraRig reduced={reduced} />
       </Canvas>
-      {/* Overlay to keep hero text readable */}
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
-      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/40" />
+      {/* Overlays don't block ball pointer events */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/40" />
     </div>
   );
 }
