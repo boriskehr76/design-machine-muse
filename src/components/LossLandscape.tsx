@@ -140,9 +140,12 @@ function Surface() {
 }
 
 const TRAIL_LEN = 180;
+const MAX_FLING = 8;
 
 function Ball({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
+  const dragPlaneRef = useRef<THREE.Mesh>(null);
+  const { camera, gl } = useThree();
   const stateRef = useRef({
     x: 3.2,
     y: 2.6,
@@ -151,6 +154,14 @@ function Ball({ reduced }: { reduced: boolean }) {
     settledFrames: 0,
     fade: 0, // 0..1 visibility
     fadingOut: false,
+    dragging: false,
+    pointerId: null as number | null,
+    lastDragX: 0,
+    lastDragY: 0,
+    lastDragT: 0,
+    dragVx: 0,
+    dragVy: 0,
+    hovering: false,
   });
   const trailRef = useRef<THREE.Vector3[]>(
     Array.from({ length: TRAIL_LEN }, () => new THREE.Vector3(3.2, 0, 2.6)),
