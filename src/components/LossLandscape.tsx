@@ -98,19 +98,21 @@ function Surface() {
 
   return (
     <group>
+      {/* Invisible mesh kept for depth occlusion of the ball/trail */}
       <mesh geometry={geometry} castShadow={false} receiveShadow={false}>
-        <meshStandardMaterial
-          vertexColors
-          metalness={0.1}
-          roughness={0.85}
+        <meshBasicMaterial
+          colorWrite={false}
           transparent
-          opacity={0.55}
-          emissive={C_LOW}
-          emissiveIntensity={0.08}
+          opacity={0}
+          depthWrite
         />
       </mesh>
       <lineSegments geometry={wireGeometry}>
-        <lineBasicMaterial color={C_LOW} transparent opacity={0.18} />
+        <lineBasicMaterial
+          vertexColors
+          transparent
+          opacity={0.85}
+        />
       </lineSegments>
     </group>
   );
