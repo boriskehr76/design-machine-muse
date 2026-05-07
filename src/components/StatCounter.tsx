@@ -5,9 +5,10 @@ interface StatCounterProps {
   value: number | "infinity";
   suffix?: string;
   label: string;
+  className?: string;
 }
 
-export function StatCounter({ value, suffix = "", label }: StatCounterProps) {
+export function StatCounter({ value, suffix = "", label, className = "" }: StatCounterProps) {
   const { ref, inView } = useInView<HTMLDivElement>();
   const target = typeof value === "number" ? value : 0;
   const display = useCountUp(target, inView && typeof value === "number");
@@ -15,7 +16,7 @@ export function StatCounter({ value, suffix = "", label }: StatCounterProps) {
   return (
     <div
       ref={ref}
-      className="flex flex-col gap-3 border border-border bg-card/40 p-6 transition-colors hover:border-accent/60"
+      className={`flex flex-col gap-3 border border-border bg-card/40 p-6 transition-colors hover:border-accent/60 ${className}`}
     >
       <span className="font-serif text-5xl leading-none text-foreground sm:text-6xl">
         {value === "infinity" ? "∞" : (

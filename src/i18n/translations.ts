@@ -30,13 +30,13 @@ export const translations = {
     "hero.cta.ghost": "View projects",
 
     // About
-    "about.label": "About",
+    "about.label": "ABOUT ME",
     "about.heading": "Two disciplines, one practice",
     "about.p1":
       "For two decades I worked at the intersection of complex systems and human needs — designing fintech products at SEB and Swedbank, educational platforms at Learnifier and EdAider, and leading design teams through ambiguity.",
     "about.p2":
       "A year ago I started studying machine learning formally. Not to become an ML engineer, but because I saw a gap: models that behave in ways users can't trust, and interfaces that ignore what the model actually knows. I want to close that gap.",
-    "about.stat1.label": "years in design",
+    "about.stat1.label": "",
     "about.stat2.label": "year in ML",
     "about.stat3.label": "ML×design projects",
     "about.stat4.label": "interest in the seam",
@@ -46,11 +46,11 @@ export const translations = {
     "skills.heading": "What I bring",
     "skills.col1.title": "ML · in progress",
     "skills.col2.title": "Design · established",
-    "skills.col3.title": "The seam · the point",
+    "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "new",
-    "skills.ml.1": "Supervised learning",
+    "skills.ml.1": "NLP & text processing ",
     "skills.ml.2": "Clustering & segmentation",
-    "skills.ml.3": "Sentiment analysis",
+    "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Recommendation systems",
     "skills.ml.5": "Anomaly detection",
     "skills.ml.6": "scikit-learn, Python",
@@ -131,7 +131,7 @@ export const translations = {
       "If you're building AI-powered products in Stockholm and see a role for someone at the intersection of ML and UX, I'd be glad to hear from you.",
     "contact.email": "boriskehr76@gmail.com",
     "contact.linkedin": "LinkedIn",
-    "contact.portfolio": "Design portfolio",
+    "contact.portfolio": "",
 
     // Footer
     "footer.left": "Boris Kehr · Stockholm · 2026",
@@ -161,13 +161,13 @@ export const translations = {
     "hero.cta.primary": "LIA-plats",
     "hero.cta.ghost": "Se projekt",
 
-    "about.label": "Om mig",
+    "about.label": "OM MIG",
     "about.heading": "Två discipliner, en praktik",
     "about.p1":
       "I två decennier jobbade jag i skärningspunkten mellan komplexa system och mänskliga behov — designade fintech-produkter för SEB och Swedbank, pedagogiska plattformar för Learnifier och EdAider, och ledde designteam genom osäkerhet.",
     "about.p2":
       "För ett år sedan började jag studera maskininlärning på ett strukturerat sätt. Inte för att bli ML-ingenjör, utan för att jag såg ett tomrum: modeller som beter sig på sätt användare inte kan lita på, och gränssnitt som ignorerar vad modellen faktiskt vet. Jag vill stänga det tomrummet.",
-    "about.stat1.label": "år inom design",
+    "about.stat1.label": "",
     "about.stat2.label": "år inom ML",
     "about.stat3.label": "ML×design-projekt",
     "about.stat4.label": "intresse för skärningspunkten",
@@ -176,11 +176,11 @@ export const translations = {
     "skills.heading": "Vad jag bidrar med",
     "skills.col1.title": "ML · under uppbyggnad",
     "skills.col2.title": "Design · etablerat",
-    "skills.col3.title": "Skärningspunkten · poängen",
+    "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "nytt",
-    "skills.ml.1": "Supervised learning",
+    "skills.ml.1": "NLP & text processing ",
     "skills.ml.2": "Klustring & segmentering",
-    "skills.ml.3": "Sentimentanalys",
+    "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Rekommendationssystem",
     "skills.ml.5": "Anomalidetektion",
     "skills.ml.6": "scikit-learn, Python",
@@ -257,7 +257,7 @@ export const translations = {
       "Om du bygger AI-drivna produkter i Stockholm och ser en roll för någon i skärningspunkten mellan ML och UX, hör gärna av dig.",
     "contact.email": "boriskehr76@gmail.com",
     "contact.linkedin": "LinkedIn",
-    "contact.portfolio": "Designportfolio",
+    "contact.portfolio": "",
 
     "footer.left": "Boris Kehr · Stockholm · 2026",
     "footer.right": "Byggd utan mall",
