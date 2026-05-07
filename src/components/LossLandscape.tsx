@@ -132,7 +132,7 @@ function Surface() {
         <lineBasicMaterial
           vertexColors
           transparent
-          opacity={0.85}
+          opacity={1}
         />
       </lineSegments>
     </group>
@@ -456,8 +456,8 @@ export function LossLandscape() {
         <CameraRig reduced={reduced} />
       </Canvas>
       {/* Overlays don't block ball pointer events */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/20" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/40" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-background/30 via-transparent to-background/20" />
     </div>
   );
 }

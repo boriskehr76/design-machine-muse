@@ -12,7 +12,6 @@ const COLS: SkillCol[] = [
   {
     title: "skills.col1.title",
     items: ["skills.ml.1", "skills.ml.2", "skills.ml.3", "skills.ml.4", "skills.ml.5", "skills.ml.6"],
-    withBadges: true,
   },
   {
     title: "skills.col2.title",
