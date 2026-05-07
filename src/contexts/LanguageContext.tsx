@@ -1,14 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { translations, type Lang, type TranslationKey } from "@/i18n/translations";
-
-interface LanguageContextValue {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-  toggleLang: () => void;
-  t: (key: TranslationKey) => string;
-}
-
-const LanguageContext = createContext<LanguageContextValue | null>(null);
+import { LanguageContext } from "./language-context";
 
 const STORAGE_KEY = "boris-lang";
 
