@@ -43,13 +43,6 @@ export function Hero() {
 
         <div className="mt-10 flex flex-wrap gap-3">
           <a
-            href="#lia"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 font-mono text-xs uppercase tracking-wider text-background transition-transform hover:-translate-y-0.5"
-          >
-            {t("hero.cta.primary")}
-            <span aria-hidden>→</span>
-          </a>
-          <a
             href="#projects"
             className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 font-mono text-xs uppercase tracking-wider text-foreground transition-colors hover:border-accent hover:text-accent"
           >
