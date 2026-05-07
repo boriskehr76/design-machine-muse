@@ -16,8 +16,8 @@ export function About() {
               {t("about.heading")}
             </h2>
             <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
-              <p>{t("about.p1")}</p>
-              <p>{t("about.p2")}</p>
+              <p className="whitespace-pre-line">{t("about.p1")}</p>
+              <p className="whitespace-pre-line">{t("about.p2")}</p>
             </div>
           </Reveal>
         </div>
