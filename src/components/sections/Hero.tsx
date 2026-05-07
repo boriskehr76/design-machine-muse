@@ -41,15 +41,6 @@ export function Hero() {
           ))}
         </ul>
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 font-mono text-xs uppercase tracking-wider text-foreground transition-colors hover:border-accent hover:text-accent"
-          >
-            {t("hero.cta.ghost")}
-            <span aria-hidden>→</span>
-          </a>
-        </div>
       </div>
 
       <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground/60">
