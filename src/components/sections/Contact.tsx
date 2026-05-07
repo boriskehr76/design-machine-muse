@@ -25,7 +25,7 @@ export function Contact() {
           </p>
 
           <div className="mt-12 flex flex-wrap gap-x-10 gap-y-4">
-            {links.map((l) => (
+            {links.filter(l => l.label).map((l) => (
               <a
                 key={l.label}
                 href={l.href}
