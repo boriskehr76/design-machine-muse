@@ -43,15 +43,15 @@ export function Nav() {
           >
             {t("nav.projects")}
           </a>
-        </nav>
-
-        <nav className="flex items-center gap-2">
           <a
             href="#about"
-            className="mr-2 hidden font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent sm:inline"
+            className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
           >
             {t("nav.about")}
           </a>
+        </nav>
+
+        <nav className="flex items-center gap-2">
           <div
             className="flex items-center rounded-full border border-border bg-card/60 p-0.5 font-mono text-xs"
             role="group"
