@@ -35,7 +35,7 @@ export const translations = {
     "about.p1":
       "For two decades I worked at the intersection of complex systems and human needs — designing fintech products at SEB and Swedbank, educational platforms at Learnifier and EdAider, and leading design teams through ambiguity.",
     "about.p2":
-      "A year ago I started studying machine learning formally. Not to become an ML engineer, but because I saw a gap: models that behave in ways users can't trust, and interfaces that ignore what the model actually knows. I want to close that gap.",
+      "A year ago I started studying machine learning formally. Not to become an ML engineer, but because I saw a gap: models that behave in ways users can't trust, and interfaces that ignore what the model actually knows. I want to close that gap. \n\n\nI write about that intersection on LinkedIn — what I'm learning, building, and getting wrong. linkedin.com/in/boriskehr",
     "about.stat1.label": "",
     "about.stat2.label": "year in ML",
     "about.stat3.label": "ML×design projects",
