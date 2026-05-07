@@ -11,6 +11,9 @@ export const translations = {
     "nav.lang.sv": "SV",
     "nav.theme.toLight": "Light",
     "nav.theme.toDark": "Dark",
+    "nav.lia": "LIA Placement",
+    "nav.projects": "View Projects",
+    "nav.about": "About Me",
 
     // Hero
     "hero.line1": "Design meets",
@@ -141,6 +144,9 @@ export const translations = {
     "nav.lang.sv": "SV",
     "nav.theme.toLight": "Ljust",
     "nav.theme.toDark": "Mörkt",
+    "nav.lia": "LIA-plats",
+    "nav.projects": "Se projekt",
+    "nav.about": "Om mig",
 
     "hero.line1": "Design möter",
     "hero.line2": "maskininlärning",
