@@ -46,20 +46,22 @@ export function Skills() {
                   <h3 className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-accent">
                     {t(col.title)}
                   </h3>
-                  <ul className="mt-6 space-y-4">
-                    {col.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start justify-between gap-3 text-sm leading-snug text-foreground/90"
-                      >
-                        <span>{t(item)}</span>
-                        {col.withBadges && (
-                          <span className="mt-0.5 shrink-0 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-accent">
-                            {t("skills.badge.new")}
-                          </span>
-                        )}
-                      </li>
-                    ))}
+                  <ul className="mt-6 space-y-3">
+                    {col.items
+                      .filter((item) => t(item).trim() !== "")
+                      .map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start justify-between gap-3 text-sm leading-snug text-foreground/90"
+                        >
+                          <span>{t(item)}</span>
+                          {col.withBadges && (
+                            <span className="mt-0.5 shrink-0 rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 font-mono text-[0.6rem] uppercase tracking-wider text-accent">
+                              {t("skills.badge.new")}
+                            </span>
+                          )}
+                        </li>
+                      ))}
                   </ul>
                 </div>
               ))}
