@@ -190,7 +190,7 @@ export const translations = {
     "skills.col2.title": "Design · etablerat",
     "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "nytt",
-    "skills.ml.1": "NLP & text processing ",
+    "skills.ml.1": "\n",
     "skills.ml.2": "Klustring & segmentering",
     "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Rekommendationssystem",
