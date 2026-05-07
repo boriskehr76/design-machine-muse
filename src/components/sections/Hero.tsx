@@ -14,7 +14,7 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-screen w-full items-center overflow-hidden pt-16">
+    <section id="top" className="relative flex min-h-screen w-full items-center overflow-hidden pt-16 my-px">
       <LossLandscape />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-6">

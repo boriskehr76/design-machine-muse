@@ -132,4 +132,8 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  .my-px {
+    @apply px-0 sm:px-4;
+  }
 }
