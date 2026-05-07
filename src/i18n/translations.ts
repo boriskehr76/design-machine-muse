@@ -117,7 +117,7 @@ export const translations = {
     "lia.p2":
       "What I offer: someone who can prototype an ML feature, write the UX spec for it, and explain both to engineers and stakeholders — in the same meeting.",
     "lia.req.title": "What I'm looking for",
-    "lia.req.1": "Stockholm (hybrid ok)",
+    "lia.req.1": "Stockholm (hybrid prefered)",
     "lia.req.2": "ML and design in the same product team",
     "lia.req.3": "A mentor who can formally track my progress",
     "lia.req.4": "User-facing AI products — not pure internal tooling",
@@ -244,7 +244,7 @@ export const translations = {
     "lia.p2":
       "Det jag erbjuder: någon som kan prototypa en ML-funktion, skriva UX-specen för den och förklara båda för ingenjörer och intressenter — i samma möte.",
     "lia.req.title": "Det jag söker",
-    "lia.req.1": "Stockholm (hybrid ok)",
+    "lia.req.1": "Stockholm (hybrid prefered)",
     "lia.req.2": "ML och design i samma produktteam",
     "lia.req.3": "En mentor som formellt kan följa min progress",
     "lia.req.4": "Användarfacing AI-produkter — inte enbart interna verktyg",
