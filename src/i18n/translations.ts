@@ -48,7 +48,7 @@ export const translations = {
     "skills.col2.title": "Design · established",
     "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "new",
-    "skills.ml.1": "NLP & text processing ",
+    "skills.ml.1": "\n",
     "skills.ml.2": "Clustering & segmentation",
     "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Recommendation systems",
