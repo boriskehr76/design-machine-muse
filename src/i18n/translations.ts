@@ -67,7 +67,7 @@ export const translations = {
     "skills.seam.5": "Explainability in interfaces",
 
     // Projects
-    "projects.label": "Selected work",
+    "projects.label": "Projects",
     "projects.heading": "Where ML and design meet",
     "projects.num": "01",
     "projects.title": "Statistical table — interactive probability explorer",
@@ -196,7 +196,7 @@ export const translations = {
     "skills.seam.4": "UX för fellägen",
     "skills.seam.5": "Förklarbarhet i gränssnitt",
 
-    "projects.label": "Utvalt arbete",
+    "projects.label": "Projekt",
     "projects.heading": "Där ML och design möts",
     "projects.num": "01",
     "projects.title": "Statistisk tabell — interaktiv sannolikhetsutforskare",

@@ -11,7 +11,7 @@ export function Projects() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section id="projects" className="border-t border-border py-28 sm:py-36">
+    <section id="projects" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="mb-6 flex items-center gap-3">

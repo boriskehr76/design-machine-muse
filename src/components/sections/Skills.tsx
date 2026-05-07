@@ -27,7 +27,7 @@ const COLS: SkillCol[] = [
 export function Skills() {
   const t = useT();
   return (
-    <section id="skills" className="border-t border-border py-28 sm:py-36">
+    <section id="skills" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="mb-6 flex items-center gap-3">

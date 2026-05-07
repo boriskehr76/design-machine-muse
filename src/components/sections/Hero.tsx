@@ -14,10 +14,10 @@ export function Hero() {
   ];
 
   return (
-    <section id="top" className="relative flex min-h-screen w-full items-center overflow-hidden pt-16 my-px">
+    <section id="top" className="relative flex min-h-[80vh] w-full items-center overflow-hidden pt-14">
       <LossLandscape />
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-6">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-4">
         <div className="mb-8 flex items-center gap-3 font-mono text-xs text-muted-foreground">
           <span className="h-px w-8 bg-accent/60" />
           <span className="uppercase tracking-[0.2em]">Boris Kehr · UX × ML</span>
@@ -40,11 +40,6 @@ export function Hero() {
             </li>
           ))}
         </ul>
-
-      </div>
-
-      <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground/60">
-        scroll
       </div>
     </section>
   );
