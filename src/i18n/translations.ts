@@ -69,25 +69,37 @@ export const translations = {
     // Projects
     "projects.label": "Projects",
     "projects.heading": "Where ML and design meet",
-    "projects.num": "01",
-    "projects.title": "Statistical table — interactive probability explorer",
-    "projects.oneliner":
-      "A tool that makes Z-tables and T-tables interactive, with live probability calculations and an animated normal distribution curve.",
     "projects.expand": "Read the case",
     "projects.collapse": "Close",
     "projects.seam.label": "The seam",
-    "projects.seam.body":
-      "Statistical tables are usually static images in textbooks. Making them interactive meant deciding what the model output — a probability — should look like when a user hovers a cell. The animated bell curve on the right panel isn't decoration: it's the model output made visible. Every design decision in the interface was driven by what the math was actually doing.",
     "projects.ml.label": "ML side",
-    "projects.ml.body":
-      "Built the probability calculation logic for both Z-scores and T-distributions. The core challenge: translating a z-score lookup into a real-time, continuous output as the user moves through the table.",
     "projects.dx.label": "Design side",
-    "projects.dx.body":
-      "Designed the two-panel layout so the table and the visual explanation live side by side — not in sequence. The right panel updates live: Z-score, P(Z ≤ z), P(Z > z), and the bell curve with the shaded area moving in real time. Chose a dark theme to make the teal curve and probability highlights legible without visual noise.",
     "projects.live": "Try it live →",
     "projects.repo": "GitHub repo →",
-    "projects.shot1.alt": "sndz-table — Z Table view with cumulative probabilities",
-    "projects.shot2.alt": "sndz-table — interactive right panel with bell curve",
+
+    "projects.p1.title": "Lenny's Podcast — Topic Explorer",
+    "projects.p1.oneliner":
+      "An ML project clustering 264 podcast episodes into 7 topic groups using SBERT sentence embeddings and K-means, with an interactive 2D episode map.",
+    "projects.p1.seam.body":
+      "Cluster IDs and 2D PCA coordinates are abstract model output. Turning them into something browsable meant binding topic toggles in the sidebar to both the scatter plot and the episode list — the same color tokens carry from dot to chip to row, so the model's structure becomes the navigation.",
+    "projects.p1.ml.body":
+      "SBERT (Sentence-BERT) embeddings on cleaned transcripts from the open ChatPRD database. K-means with K=7 chosen via the elbow method. PCA projects the 384-dimensional vectors into 2D for the map — clustering itself runs on the full vectors.",
+    "projects.p1.dx.body":
+      "Two-pane layout: topic toggles on the left, scatter plot, topic distribution and filterable episode table on the right. One color per topic across every surface so the visual identity of each cluster carries through the whole interface.",
+    "projects.p1.shot1.alt": "Lenny's Podgraph — episode map scatter plot colored by topic cluster",
+    "projects.p1.shot2.alt": "Lenny's Podgraph — filtered episode list with topic, guest and duration",
+
+    "projects.p2.title": "Statistical table — interactive probability explorer",
+    "projects.p2.oneliner":
+      "A tool that makes Z-tables and T-tables interactive, with live probability calculations and an animated normal distribution curve.",
+    "projects.p2.seam.body":
+      "Statistical tables are usually static images in textbooks. Making them interactive meant deciding what the model output — a probability — should look like when a user hovers a cell. The animated bell curve on the right panel isn't decoration: it's the model output made visible. Every design decision in the interface was driven by what the math was actually doing.",
+    "projects.p2.ml.body":
+      "Built the probability calculation logic for both Z-scores and T-distributions. The core challenge: translating a z-score lookup into a real-time, continuous output as the user moves through the table.",
+    "projects.p2.dx.body":
+      "Designed the two-panel layout so the table and the visual explanation live side by side — not in sequence. The right panel updates live: Z-score, P(Z ≤ z), P(Z > z), and the bell curve with the shaded area moving in real time. Chose a dark theme to make the teal curve and probability highlights legible without visual noise.",
+    "projects.p2.shot1.alt": "sndz-table — Z Table view with cumulative probabilities",
+    "projects.p2.shot2.alt": "sndz-table — interactive right panel with bell curve",
 
     // Timeline
     "tl.label": "Background",
@@ -198,25 +210,37 @@ export const translations = {
 
     "projects.label": "Projekt",
     "projects.heading": "Där ML och design möts",
-    "projects.num": "01",
-    "projects.title": "Statistisk tabell — interaktiv sannolikhetsutforskare",
-    "projects.oneliner":
-      "Ett verktyg som gör Z-tabeller och T-tabeller interaktiva, med live-sannolikhetsberäkningar och en animerad normalfördelningskurva.",
     "projects.expand": "Läs caset",
     "projects.collapse": "Stäng",
     "projects.seam.label": "Skärningspunkten",
-    "projects.seam.body":
-      "Statistiska tabeller är oftast statiska bilder i läroböcker. Att göra dem interaktiva innebar att bestämma hur modellens output — en sannolikhet — ska se ut när en användare hovrar över en cell. Den animerade klockformen i höger panel är ingen dekoration: det är modellens output gjord synlig. Varje designbeslut i gränssnittet drevs av vad matematiken faktiskt gjorde.",
     "projects.ml.label": "ML-sidan",
-    "projects.ml.body":
-      "Byggde sannolikhetsberäkningslogiken för både Z-värden och T-fördelningar. Kärnproblemet: att översätta ett z-värde-uppslag till en realtids-, kontinuerlig output när användaren rör sig genom tabellen.",
     "projects.dx.label": "Design-sidan",
-    "projects.dx.body":
-      "Designade tvåpanelslayouten så att tabellen och den visuella förklaringen lever sida vid sida — inte i sekvens. Höger panel uppdateras live: Z-värde, P(Z ≤ z), P(Z > z) och klockformen med det skuggade området som rör sig i realtid. Valde ett mörkt tema för att göra den blågröna kurvan och sannolikhetsmarkeringarna läsbara utan visuellt brus.",
     "projects.live": "Testa live →",
     "projects.repo": "GitHub-repo →",
-    "projects.shot1.alt": "sndz-table — Z-tabellvy med kumulativa sannolikheter",
-    "projects.shot2.alt": "sndz-table — interaktiv höger panel med klockform",
+
+    "projects.p1.title": "Lenny's Podcast — Topic Explorer",
+    "projects.p1.oneliner":
+      "Ett ML-projekt som klustrar 264 poddavsnitt i 7 ämnesgrupper med SBERT-meningsembeddings och K-means, med en interaktiv 2D-karta över avsnitten.",
+    "projects.p1.seam.body":
+      "Kluster-ID:n och 2D PCA-koordinater är abstrakt modell-output. Att göra det browsbart innebar att koppla ämnes-toggles i sidopanelen till både scatter-plotten och avsnittslistan — samma färgtokens följer med från punkt till chip till rad, så modellens struktur blir navigationen.",
+    "projects.p1.ml.body":
+      "SBERT (Sentence-BERT) embeddings på rensade transkript från den öppna ChatPRD-databasen. K-means med K=7 valt via elbow-metoden. PCA projicerar de 384-dimensionella vektorerna till 2D för kartan — själva klustringen körs på de fulla vektorerna.",
+    "projects.p1.dx.body":
+      "Tvåpanelslayout: ämnes-toggles till vänster, scatter-plot, ämnesfördelning och filtrerbar avsnittstabell till höger. En färg per ämne på alla ytor så att varje klusters visuella identitet bär genom hela gränssnittet.",
+    "projects.p1.shot1.alt": "Lenny's Podgraph — avsnittskarta som scatter-plot färgad efter ämneskluster",
+    "projects.p1.shot2.alt": "Lenny's Podgraph — filtrerad avsnittslista med ämne, gäst och längd",
+
+    "projects.p2.title": "Statistisk tabell — interaktiv sannolikhetsutforskare",
+    "projects.p2.oneliner":
+      "Ett verktyg som gör Z-tabeller och T-tabeller interaktiva, med live-sannolikhetsberäkningar och en animerad normalfördelningskurva.",
+    "projects.p2.seam.body":
+      "Statistiska tabeller är oftast statiska bilder i läroböcker. Att göra dem interaktiva innebar att bestämma hur modellens output — en sannolikhet — ska se ut när en användare hovrar över en cell. Den animerade klockformen i höger panel är ingen dekoration: det är modellens output gjord synlig. Varje designbeslut i gränssnittet drevs av vad matematiken faktiskt gjorde.",
+    "projects.p2.ml.body":
+      "Byggde sannolikhetsberäkningslogiken för både Z-värden och T-fördelningar. Kärnproblemet: att översätta ett z-värde-uppslag till en realtids-, kontinuerlig output när användaren rör sig genom tabellen.",
+    "projects.p2.dx.body":
+      "Designade tvåpanelslayouten så att tabellen och den visuella förklaringen lever sida vid sida — inte i sekvens. Höger panel uppdateras live: Z-värde, P(Z ≤ z), P(Z > z) och klockformen med det skuggade området som rör sig i realtid. Valde ett mörkt tema för att göra den blågröna kurvan och sannolikhetsmarkeringarna läsbara utan visuellt brus.",
+    "projects.p2.shot1.alt": "sndz-table — Z-tabellvy med kumulativa sannolikheter",
+    "projects.p2.shot2.alt": "sndz-table — interaktiv höger panel med klockform",
 
     "tl.label": "Bakgrund",
     "tl.heading": "Var jag har varit",
