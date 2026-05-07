@@ -12,7 +12,6 @@ const COLS: SkillCol[] = [
   {
     title: "skills.col1.title",
     items: ["skills.ml.1", "skills.ml.2", "skills.ml.3", "skills.ml.4", "skills.ml.5", "skills.ml.6"],
-    withBadges: true,
   },
   {
     title: "skills.col2.title",
@@ -27,7 +26,7 @@ const COLS: SkillCol[] = [
 export function Skills() {
   const t = useT();
   return (
-    <section id="skills" className="py-20 sm:py-28">
+    <section id="skills" className="py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="mb-6 flex items-center gap-3">
