@@ -26,7 +26,7 @@ export function Timeline() {
   }, []);
 
   return (
-    <section id="background" className="py-20 sm:py-28">
+    <section id="background" className="py-12 sm:py-16">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="mb-6 flex items-center gap-3">
