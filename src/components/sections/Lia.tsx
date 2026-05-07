@@ -10,7 +10,7 @@ export function Lia() {
     <section id="lia" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <div className="rounded-3xl border border-border bg-card/40 p-8 sm:p-12 lg:p-16">
+          <div className="rounded-3xl border border-border bg-[hsl(262,70%,60%)]/[0.08] p-8 sm:p-12 lg:p-16">
             <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
               <div>
                 <div className="mb-5 flex items-center gap-3">
