@@ -10,7 +10,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="border-t border-border py-28 sm:py-36">
+    <section id="contact" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="mb-6 flex items-center gap-3">

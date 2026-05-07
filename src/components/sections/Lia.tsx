@@ -7,7 +7,7 @@ const REQS: TranslationKey[] = ["lia.req.1", "lia.req.2", "lia.req.3", "lia.req.
 export function Lia() {
   const t = useT();
   return (
-    <section id="lia" className="border-t border-border py-28 sm:py-36">
+    <section id="lia" className="py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="rounded-3xl border border-border bg-card/40 p-8 sm:p-12 lg:p-16">
