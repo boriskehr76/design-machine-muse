@@ -12,7 +12,7 @@ export const translations = {
     "nav.theme.toLight": "Light",
     "nav.theme.toDark": "Dark",
     "nav.lia": "LIA Placement",
-    "nav.projects": "View Projects",
+    "nav.projects": "Projects",
     "nav.about": "About Me",
 
     // Hero
@@ -145,7 +145,7 @@ export const translations = {
     "nav.theme.toLight": "Ljust",
     "nav.theme.toDark": "Mörkt",
     "nav.lia": "LIA-plats",
-    "nav.projects": "Se projekt",
+    "nav.projects": "Projekt",
     "nav.about": "Om mig",
 
     "hero.line1": "Design möter",
