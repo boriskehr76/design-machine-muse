@@ -35,7 +35,7 @@ export const translations = {
     "about.p1":
       "For two decades I worked at the intersection of complex systems and human needs — designing fintech products at SEB and Swedbank, educational platforms at Learnifier and EdAider, and leading design teams through ambiguity.",
     "about.p2":
-      "A year ago I started studying machine learning formally. Not to become an ML engineer, but because I saw a gap: models that behave in ways users can't trust, and interfaces that ignore what the model actually knows. I want to close that gap.",
+      "A year ago I started studying machine learning formally. Not to become an ML engineer, but because I saw a gap: models that behave in ways users can't trust, and interfaces that ignore what the model actually knows. I want to close that gap. \n\n\nI write about that intersection on LinkedIn — what I'm learning, building, and getting wrong. linkedin.com/in/boriskehr",
     "about.stat1.label": "",
     "about.stat2.label": "year in ML",
     "about.stat3.label": "ML×design projects",
@@ -178,7 +178,7 @@ export const translations = {
     "about.p1":
       "I två decennier jobbade jag i skärningspunkten mellan komplexa system och mänskliga behov — designade fintech-produkter för SEB och Swedbank, pedagogiska plattformar för Learnifier och EdAider, och ledde designteam genom osäkerhet.",
     "about.p2":
-      "För ett år sedan började jag studera maskininlärning på ett strukturerat sätt. Inte för att bli ML-ingenjör, utan för att jag såg ett tomrum: modeller som beter sig på sätt användare inte kan lita på, och gränssnitt som ignorerar vad modellen faktiskt vet. Jag vill stänga det tomrummet.",
+      "För ett år sedan började jag studera maskininlärning på ett strukturerat sätt. Inte för att bli ML-ingenjör, utan för att jag såg ett tomrum: modeller som beter sig på sätt användare inte kan lita på, och gränssnitt som ignorerar vad modellen faktiskt vet. Jag vill stänga det tomrummet. \n\n\nJag skriver om den skärningspunkten på LinkedIn — vad jag lär mig, bygger och gör fel. linkedin.com/in/boriskehr",
     "about.stat1.label": "",
     "about.stat2.label": "år inom ML",
     "about.stat3.label": "ML×design-projekt",
