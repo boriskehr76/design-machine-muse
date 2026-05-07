@@ -24,7 +24,7 @@ export function About() {
 
           <Reveal delay={120}>
             <div className="grid grid-cols-2 gap-px bg-border">
-              <StatCounter value={20} suffix="+" label={t("about.stat1.label")} />
+              <StatCounter value={0} suffix="" label={t("about.stat1.label")} className="hidden" />
               <StatCounter value={1} suffix="" label={t("about.stat2.label")} />
               <StatCounter value={5} label={t("about.stat3.label")} />
               <StatCounter value="infinity" label={t("about.stat4.label")} />
