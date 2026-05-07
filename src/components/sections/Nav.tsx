@@ -25,12 +25,33 @@ export function Nav() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+      <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
         <a href="#top" className="font-mono text-sm tracking-tight text-foreground hover:text-accent transition-colors">
           {t("nav.logo")}
         </a>
 
+        <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 sm:flex">
+          <a
+            href="#lia"
+            className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
+          >
+            {t("nav.lia")}
+          </a>
+          <a
+            href="#projects"
+            className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
+          >
+            {t("nav.projects")}
+          </a>
+        </nav>
+
         <nav className="flex items-center gap-2">
+          <a
+            href="#about"
+            className="mr-2 hidden font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent sm:inline"
+          >
+            {t("nav.about")}
+          </a>
           <div
             className="flex items-center rounded-full border border-border bg-card/60 p-0.5 font-mono text-xs"
             role="group"

@@ -32,13 +32,11 @@ export function Hero() {
           {t("hero.sub")}
         </p>
 
-        <ul className="mt-10 flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <li
-              key={tag}
-              className="rounded-full border border-border bg-card/60 px-3 py-1.5 font-mono text-[0.72rem] uppercase tracking-wider text-muted-foreground"
-            >
-              {tag}
+        <ul className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[0.72rem] uppercase tracking-wider text-muted-foreground">
+          {tags.map((tag, i) => (
+            <li key={tag} className="flex items-center gap-3">
+              {i > 0 && <span aria-hidden className="text-muted-foreground/40">·</span>}
+              <span>{tag}</span>
             </li>
           ))}
         </ul>
