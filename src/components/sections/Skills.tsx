@@ -36,6 +36,9 @@ export function Skills() {
           <h2 className="max-w-2xl font-serif text-4xl leading-tight text-foreground sm:text-5xl">
             {t("skills.heading")}
           </h2>
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-foreground/80">
+            {t("skills.intro")}
+          </p>
         </Reveal>
 
         <Reveal delay={120}>
