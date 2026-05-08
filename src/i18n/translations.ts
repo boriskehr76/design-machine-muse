@@ -66,6 +66,7 @@ export const translations = {
     "skills.seam.2": "Creating trust and predictability",
     "skills.seam.3": "User needs → model requirements",
     "skills.seam.4": "",
+    "skills.seam.5": "Responsible AI",
 
     // Projects
     "projects.label": "Projects",
