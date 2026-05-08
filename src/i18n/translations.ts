@@ -45,7 +45,7 @@ export const translations = {
     "skills.label": "SKILLS",
     "skills.heading": "What I bring",
     "skills.intro":
-      "I'm not a developer pretending to be junior. I know how tech teams work, how products get built, and how to talk across disciplines. I can contribute to ML work, document it clearly, and communicate it to people who don't speak Python — in the same meeting.",
+      "Twenty years of product thinking, one year of machine learning — and enough curiosity to close the gap between the two. I know how tech teams work, how products get built, and how to find what users actually need. I can contribute to ML work, document it clearly, and explain it to people who don't speak Python — in the same meeting.",
     "skills.col1.title": "ML · IN PROGRESS",
     "skills.col2.title": "DESIGN · ESTABLISHED",
     "skills.col3.title": "DEV + AI TOOLS",
