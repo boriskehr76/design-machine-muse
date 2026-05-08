@@ -42,10 +42,12 @@ export const translations = {
     "about.stat4.label": "interest in the seam",
 
     // Skills
-    "skills.label": "Skills",
+    "skills.label": "SKILLS",
     "skills.heading": "What I bring",
-    "skills.col1.title": "ML · in progress",
-    "skills.col2.title": "Design · established",
+    "skills.intro":
+      "I'm not a developer pretending to be junior. I know how tech teams work, how products get built, and how to talk across disciplines. I can contribute to ML work, document it clearly, and communicate it to people who don't speak Python — in the same meeting.",
+    "skills.col1.title": "ML · IN PROGRESS",
+    "skills.col2.title": "DESIGN · ESTABLISHED",
     "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "new",
     "skills.ml.1": "\n",
@@ -53,7 +55,7 @@ export const translations = {
     "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Recommendation systems",
     "skills.ml.5": "Anomaly detection",
-    "skills.ml.6": "scikit-learn, Python",
+    "skills.ml.6": "Figma, Framer, Miro",
     "skills.dx.1": "UX research & testing",
     "skills.dx.2": "Interaction design",
     "skills.dx.3": "Design systems",
@@ -127,10 +129,10 @@ export const translations = {
     "lia.p1":
       "My LIA placement runs October to early December 2026 — a formal part of my ML education program. I'm looking for an AI-enabled product company in Stockholm where ML and design work in proximity, not in separate silos.",
     "lia.p2":
-      "What I offer: someone who can prototype an ML feature, write the UX spec for it, and explain both to engineers and stakeholders — in the same meeting.",
+      "Twenty years of product thinking, one year of machine learning — and enough curiosity to close the gap between the two. I know how tech teams work, how products get built, and how to find what users actually need. I can contribute to ML work, document it clearly, and explain it to people who don't speak Python — in the same meeting.",
     "lia.req.title": "What I'm looking for",
     "lia.req.1": "Stockholm (hybrid prefered)",
-    "lia.req.2": "ML and design in the same product team",
+    "lia.req.2": "AI as a vital part of the organisation",
     "lia.req.3": "A mentor who can formally track my progress",
     "lia.req.4": "User-facing AI products — not pure internal tooling",
     "lia.req.5": "Some tolerance for learning-by-doing",
@@ -186,8 +188,10 @@ export const translations = {
 
     "skills.label": "Förmågor",
     "skills.heading": "Vad jag bidrar med",
-    "skills.col1.title": "ML · under uppbyggnad",
-    "skills.col2.title": "Design · etablerat",
+    "skills.intro":
+      "Jag är inte en utvecklare som låtsas vara junior. Jag vet hur tech-team fungerar, hur produkter byggs och hur man kommunicerar över discipliner. Jag kan bidra till ML-arbete, dokumentera det tydligt och kommunicera det till personer som inte pratar Python — i samma möte.",
+    "skills.col1.title": "ML · UNDER UPPBYGGNAD",
+    "skills.col2.title": "DESIGN · ETABLERAT",
     "skills.col3.title": "DEV + AI TOOLS",
     "skills.badge.new": "nytt",
     "skills.ml.1": "\n",
@@ -195,7 +199,7 @@ export const translations = {
     "skills.ml.3": "Claude + Code + Cowork",
     "skills.ml.4": "Rekommendationssystem",
     "skills.ml.5": "Anomalidetektion",
-    "skills.ml.6": "scikit-learn, Python",
+    "skills.ml.6": "Figma, Framer, Miro",
     "skills.dx.1": "UX-forskning & testning",
     "skills.dx.2": "Interaktionsdesign",
     "skills.dx.3": "Designsystem",
