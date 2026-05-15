@@ -8,9 +8,11 @@ import shotZ from "@/assets/sndz-z-table.png";
 import shotPanel from "@/assets/sndz-panel.png";
 import shotPodMap from "@/assets/lennys-podgraph-map.png";
 import shotPodList from "@/assets/lennys-podgraph-list.png";
+import shotAmaHome from "@/assets/ama-rag-home.png";
+import shotAmaAnswer from "@/assets/ama-rag-answer.png";
 
 type ProjectItem = {
-  key: "p1" | "p2";
+  key: "p0" | "p1" | "p2";
   shot1: string;
   shot2: string;
   liveUrl: string;
@@ -18,6 +20,13 @@ type ProjectItem = {
 };
 
 const projects: ProjectItem[] = [
+  {
+    key: "p0",
+    shot1: shotAmaHome,
+    shot2: shotAmaAnswer,
+    liveUrl: "https://ask-boris-production.up.railway.app/",
+    repoUrl: "https://github.com/boriskehr76/ask-boris",
+  },
   {
     key: "p1",
     shot1: shotPodMap,
