@@ -79,6 +79,18 @@ export const translations = {
     "projects.live": "Try it live →",
     "projects.repo": "GitHub repo →",
 
+    "projects.p0.title": "AMA Design RAG — Ask my writing anything",
+    "projects.p0.oneliner":
+      "A retrieval-augmented chatbot trained on six years of my LinkedIn posts and articles. Ask about design, product or AI and get answers grounded in what I've actually written.",
+    "projects.p0.seam.body":
+      "RAG output is only as good as the interface around it. The chat surface had to make provenance feel honest — answers stream in, sourced from real posts, with a quiet disclaimer that this is the archive talking, not me today. The suggestion chips lower the cold-start cost: they teach the user what the corpus is good at without a tour.",
+    "projects.p0.ml.body":
+      "Embedded ~400 LinkedIn posts and articles, chunked and indexed in a vector store. Retrieval pulls the most relevant passages per query, an LLM composes the answer with citations to the underlying posts. Tuning was mostly about chunk size, retrieval count, and prompt scaffolding to keep the voice consistent.",
+    "projects.p0.dx.body":
+      "Editorial layout — serif headline, italic accent, generous whitespace — to signal an archive, not a chatbot toy. Suggestion chips above the input remove the blank-page problem. The answer renders as a calm reading column with a clear 'YOU / BORIS' rhythm so the conversation stays scannable.",
+    "projects.p0.shot1.alt": "AMA Design RAG — landing page with suggested questions about design, product and AI",
+    "projects.p0.shot2.alt": "AMA Design RAG — answer view with question bubble and grounded response from the archive",
+
     "projects.p1.title": "Lenny's Podcast — Topic Explorer",
     "projects.p1.oneliner":
       "An ML project clustering 264 podcast episodes into 7 topic groups using SBERT sentence embeddings and K-means, with an interactive 2D episode map.",
@@ -221,6 +233,18 @@ export const translations = {
     "projects.dx.label": "Design-sidan",
     "projects.live": "Testa live →",
     "projects.repo": "GitHub-repo →",
+
+    "projects.p0.title": "AMA Design RAG — Fråga min text vad som helst",
+    "projects.p0.oneliner":
+      "En retrieval-augmenterad chatbot tränad på sex års LinkedIn-inlägg och artiklar. Fråga om design, produkt eller AI och få svar grundade i det jag faktiskt skrivit.",
+    "projects.p0.seam.body":
+      "RAG-output är bara så bra som gränssnittet runt det. Chat-ytan måste få proveniens att kännas ärlig — svar streamas in, hämtade från riktiga inlägg, med en lugn disclaimer att det är arkivet som talar, inte jag idag. Förslagschipsen sänker kallstartskostnaden: de lär användaren vad korpusen är bra på utan en rundtur.",
+    "projects.p0.ml.body":
+      "Embeddade ~400 LinkedIn-inlägg och artiklar, chunkade och indexerade i en vektordatabas. Retrieval hämtar de mest relevanta passagerna per fråga, en LLM komponerar svaret med citat till källinläggen. Tuningen handlade mest om chunk-storlek, antal träffar och prompt-scaffolding för att hålla rösten konsekvent.",
+    "projects.p0.dx.body":
+      "Redaktionell layout — serif-rubrik, kursiv accent, generös vitrymd — för att signalera ett arkiv, inte en chatbot-leksak. Förslagschipsen ovanför inputen tar bort tomma-sidan-problemet. Svaret renderas som en lugn läsekolumn med tydlig 'YOU / BORIS'-rytm så att konversationen förblir skanningsbar.",
+    "projects.p0.shot1.alt": "AMA Design RAG — startsida med föreslagna frågor om design, produkt och AI",
+    "projects.p0.shot2.alt": "AMA Design RAG — svarsvy med frågebubbla och grundat svar från arkivet",
 
     "projects.p1.title": "Lenny's Podcast — Topic Explorer",
     "projects.p1.oneliner":
