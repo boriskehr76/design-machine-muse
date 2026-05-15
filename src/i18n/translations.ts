@@ -234,6 +234,18 @@ export const translations = {
     "projects.live": "Testa live →",
     "projects.repo": "GitHub-repo →",
 
+    "projects.p0.title": "AMA Design RAG — Fråga min text vad som helst",
+    "projects.p0.oneliner":
+      "En retrieval-augmenterad chatbot tränad på sex års LinkedIn-inlägg och artiklar. Fråga om design, produkt eller AI och få svar grundade i det jag faktiskt skrivit.",
+    "projects.p0.seam.body":
+      "RAG-output är bara så bra som gränssnittet runt det. Chat-ytan måste få proveniens att kännas ärlig — svar streamas in, hämtade från riktiga inlägg, med en lugn disclaimer att det är arkivet som talar, inte jag idag. Förslagschipsen sänker kallstartskostnaden: de lär användaren vad korpusen är bra på utan en rundtur.",
+    "projects.p0.ml.body":
+      "Embeddade ~400 LinkedIn-inlägg och artiklar, chunkade och indexerade i en vektordatabas. Retrieval hämtar de mest relevanta passagerna per fråga, en LLM komponerar svaret med citat till källinläggen. Tuningen handlade mest om chunk-storlek, antal träffar och prompt-scaffolding för att hålla rösten konsekvent.",
+    "projects.p0.dx.body":
+      "Redaktionell layout — serif-rubrik, kursiv accent, generös vitrymd — för att signalera ett arkiv, inte en chatbot-leksak. Förslagschipsen ovanför inputen tar bort tomma-sidan-problemet. Svaret renderas som en lugn läsekolumn med tydlig 'YOU / BORIS'-rytm så att konversationen förblir skanningsbar.",
+    "projects.p0.shot1.alt": "AMA Design RAG — startsida med föreslagna frågor om design, produkt och AI",
+    "projects.p0.shot2.alt": "AMA Design RAG — svarsvy med frågebubbla och grundat svar från arkivet",
+
     "projects.p1.title": "Lenny's Podcast — Topic Explorer",
     "projects.p1.oneliner":
       "Ett ML-projekt som klustrar 264 poddavsnitt i 7 ämnesgrupper med SBERT-meningsembeddings och K-means, med en interaktiv 2D-karta över avsnitten.",
