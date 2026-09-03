@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Reveal } from "@/components/Reveal";
 import { useT } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
@@ -24,7 +25,7 @@ const projects: ProjectItem[] = [
     key: "p0",
     shot1: shotAmaHome,
     shot2: shotAmaAnswer,
-    liveUrl: "https://ask-boris-production.up.railway.app/",
+    liveUrl: "/ask",
     repoUrl: "https://github.com/boriskehr76/ask-boris",
   },
   {
@@ -127,14 +128,23 @@ function ProjectCard({ project, index }: { project: ProjectItem; index: number }
         </div>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 font-mono text-xs uppercase tracking-wider text-background transition-transform hover:-translate-y-0.5"
-          >
-            {t("projects.live")}
-          </a>
+          {project.liveUrl.startsWith("/") ? (
+            <Link
+              to={project.liveUrl}
+              className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 font-mono text-xs uppercase tracking-wider text-background transition-transform hover:-translate-y-0.5"
+            >
+              {t("projects.live")}
+            </Link>
+          ) : (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 font-mono text-xs uppercase tracking-wider text-background transition-transform hover:-translate-y-0.5"
+            >
+              {t("projects.live")}
+            </a>
+          )}
           <a
             href={project.repoUrl}
             target="_blank"

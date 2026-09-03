@@ -14,6 +14,7 @@ export const translations = {
     "nav.lia": "LIA Placement",
     "nav.projects": "Projects",
     "nav.about": "About Me",
+    "nav.ask": "Ask Boris",
 
     // Hero
     "hero.line1": "Design meets",
@@ -159,6 +160,26 @@ export const translations = {
     "contact.linkedin": "LinkedIn",
     "contact.portfolio": "",
 
+    // Ask Boris
+    "ask.label": "Ask Boris",
+    "ask.heading": "Ask me anything",
+    "ask.sub": "Ask me anything based on six years of writing about design, product and AI. Answers are grounded in what I've actually written — not a generic model guessing.",
+    "ask.placeholder": "What do you think about...",
+    "ask.send": "Ask",
+    "ask.thinking": "Thinking...",
+    "ask.confidence.high": "High confidence",
+    "ask.confidence.medium": "Related topics",
+    "ask.confidence.low": "Low confidence",
+    "ask.confirm.title": "I'm not confident I've written enough about this",
+    "ask.confirm.body": "This might be outside what I've covered in six years of posts and articles. I can still take a swing at it, extrapolating from related topics — or you can rephrase.",
+    "ask.confirm.yes": "Answer anyway",
+    "ask.confirm.no": "Rephrase instead",
+    "ask.sources.label": "Sources",
+    "ask.error": "Something went wrong reaching Ask Boris. Try again in a moment.",
+    "ask.empty.hint": "Try: \"What's your take on AI hype in product design?\"",
+    "ask.you": "You",
+    "ask.boris": "Boris",
+
     // Footer
     "footer.left": "Boris Kehr · Stockholm · 2026",
     "footer.right": "Built without a template",
@@ -173,6 +194,7 @@ export const translations = {
     "nav.lia": "LIA-plats",
     "nav.projects": "Projekt",
     "nav.about": "Om mig",
+    "nav.ask": "Fråga Boris",
 
     "hero.line1": "Design möter",
     "hero.line2": "maskininlärning",
@@ -310,6 +332,25 @@ export const translations = {
     "contact.email": "boriskehr76@gmail.com",
     "contact.linkedin": "LinkedIn",
     "contact.portfolio": "",
+
+    "ask.label": "Fråga Boris",
+    "ask.heading": "Fråga mig vad som helst",
+    "ask.sub": "Fråga mig vad som helst baserat på sex års skrivande om design, produkt och AI. Svaren är grundade i vad jag faktiskt skrivit — inte en generisk modell som gissar.",
+    "ask.placeholder": "Vad tycker du om...",
+    "ask.send": "Fråga",
+    "ask.thinking": "Tänker...",
+    "ask.confidence.high": "Hög säkerhet",
+    "ask.confidence.medium": "Relaterade ämnen",
+    "ask.confidence.low": "Låg säkerhet",
+    "ask.confirm.title": "Jag är inte säker på att jag skrivit tillräckligt om det här",
+    "ask.confirm.body": "Det här kan ligga utanför vad jag täckt i sex års inlägg och artiklar. Jag kan ändå försöka svara, genom att extrapolera från relaterade ämnen — eller så omformulerar du frågan.",
+    "ask.confirm.yes": "Svara ändå",
+    "ask.confirm.no": "Omformulera istället",
+    "ask.sources.label": "Källor",
+    "ask.error": "Något gick fel när jag kontaktade Ask Boris. Försök igen om en stund.",
+    "ask.empty.hint": "Prova: \"Vad tycker du om AI-hypen inom produktdesign?\"",
+    "ask.you": "Du",
+    "ask.boris": "Boris",
 
     "footer.left": "Boris Kehr · Stockholm · 2026",
     "footer.right": "Byggd utan mall",

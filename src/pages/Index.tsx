@@ -7,28 +7,22 @@ import { Timeline } from "@/components/sections/Timeline";
 import { Lia } from "@/components/sections/Lia";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/sections/Footer";
-import { LanguageProvider } from "@/contexts/LanguageContext";
-import { ThemeProvider } from "@/contexts/ThemeContext";
 
 const Index = () => {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <div className="min-h-screen bg-background text-foreground">
-          <Nav />
-          <main>
-            <Hero />
-            <Lia />
-            <Projects />
-            <Skills />
-            <Timeline />
-            <About />
-            <Contact />
-          </main>
-          <Footer />
-        </div>
-      </LanguageProvider>
-    </ThemeProvider>
+    <div className="min-h-screen bg-background text-foreground">
+      <Nav />
+      <main>
+        <Hero />
+        <Lia />
+        <Projects />
+        <Skills />
+        <Timeline />
+        <About />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
   );
 };
 

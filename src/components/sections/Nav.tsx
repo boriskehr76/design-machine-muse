@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { cn } from "@/lib/utils";
@@ -8,6 +9,9 @@ export function Nav() {
   const { lang, setLang, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+  const anchor = (id: string) => (isHome ? `#${id}` : `/#${id}`);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -26,29 +30,38 @@ export function Nav() {
       )}
     >
       <div className="relative mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-        <a href="#top" className="font-mono text-sm tracking-tight text-foreground hover:text-accent transition-colors">
+        <a href={anchor("top")} className="font-mono text-sm tracking-tight text-foreground hover:text-accent transition-colors">
           {t("nav.logo")}
         </a>
 
         <nav className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 sm:flex">
           <a
-            href="#lia"
+            href={anchor("lia")}
             className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
           >
             {t("nav.lia")}
           </a>
           <a
-            href="#projects"
+            href={anchor("projects")}
             className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
           >
             {t("nav.projects")}
           </a>
           <a
-            href="#about"
+            href={anchor("about")}
             className="pointer-events-auto font-mono text-xs uppercase tracking-wider text-muted-foreground transition-colors hover:text-accent"
           >
             {t("nav.about")}
           </a>
+          <Link
+            to="/ask"
+            className={cn(
+              "pointer-events-auto font-mono text-xs uppercase tracking-wider transition-colors hover:text-accent",
+              pathname === "/ask" ? "text-accent" : "text-muted-foreground",
+            )}
+          >
+            {t("nav.ask")}
+          </Link>
         </nav>
 
         <nav className="flex items-center gap-2">
